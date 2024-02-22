@@ -6,7 +6,7 @@
           ColumnDefinitions="*, *, *, *"
           Margin="2">
         
-        <!-- (, ), ^, del -->
+        <!-- (, ), ^, DEL -->
         <Button Text="("
                 Grid.Row="0"
                 Grid.Column="0"
