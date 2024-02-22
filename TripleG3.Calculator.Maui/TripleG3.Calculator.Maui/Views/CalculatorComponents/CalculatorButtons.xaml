@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TripleG3.Calculator.Maui.Views.CalculatorView"
-             xmlns:Local="clr-namespace:TripleG3.Calculator.Maui"
-             xmlns:ViewModels="clr-namespace:TripleG3.Calculator.Maui.ViewModels"
-             Local:Specky.Inject="{x:Type ViewModels:ExpressionViewModel}">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
+             x:Class="TripleG3.Calculator.Maui.Views.CalculatorComponents.CalculatorButtons">
     <Grid RowDefinitions="*, *, *, *, *"
-          ColumnDefinitions="*, *, *, *">
+          ColumnDefinitions="*, *, *, *"
+          Margin="2">
         <!--Top row-->
         <Button Text="C"
-                Command="{Binding DeleteFromEndOfExpressionCommand}" />
-        <Button Text="/"
+                Command="{Binding ClearExpressionCommand}" />
+        <Button Text="÷"
                 Grid.Column="1"
                 Command="{Binding AddToExpressionCommand}"
                 CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
-        <Button Text="*"
+        <Button Text="×"
                 Grid.Column="2"
                 Command="{Binding AddToExpressionCommand}"
                 CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
@@ -83,7 +81,7 @@
                 Grid.Row="3"
                 Grid.RowSpan="2"
                 Grid.Column="3"
-                Command="{Binding EvaluateExpressionCommand}" />
+                Command="{Binding SolveExpressionCommand}" />
 
         <!--0, ., = -->
         <Button Text="0"

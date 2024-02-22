@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TripleG3.Calculator.Maui.Views.CalculatorComponents.CalculatorDisplay">
+    <Grid RowDefinitions="1*, 2*"
+          ColumnDefinitions="1*, 3*">
+
+        <ListView ItemsSource="{Binding Expressions}"
+                  SelectedItem="{Binding Expression, Mode=OneWayToSource}"
+                  Grid.RowSpan="2">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label Text="{Binding}"
+                               FontSize="12"
+                               TextColor="Gray" />
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Label Text="{Binding Expression}"
+               HorizontalOptions="EndAndExpand"
+               VerticalOptions="Center"
+               FontSize="40"
+               Grid.Column="1" />
+
+        <Label Text="{Binding Result}"
+               FontSize="70"
+               HorizontalOptions="EndAndExpand"
+               VerticalOptions="Center"
+               Grid.Row="1"
+               Grid.Column="1" />
+    </Grid>
+</ContentView>

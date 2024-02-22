@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TripleG3.Calculator.Maui.Views.CalculatorView"
+             xmlns:Local="clr-namespace:TripleG3.Calculator.Maui"
+             xmlns:CalculatorComponents="clr-namespace:TripleG3.Calculator.Maui.Views.CalculatorComponents"
+             xmlns:ViewModels="clr-namespace:TripleG3.Calculator.Maui.ViewModels"
+             Local:Specky.Inject="{x:Type ViewModels:ExpressionViewModel}">
+
+    <Grid RowDefinitions="1*, 4*">
+        <CalculatorComponents:CalculatorDisplay />
+        <CalculatorComponents:CalculatorButtons Grid.Row="1"/>
+    </Grid>
+
+</ContentView>
