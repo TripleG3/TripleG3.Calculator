@@ -182,7 +182,8 @@ public class StringExpressionSolver(IStringExpressionMutator stringExpressionTri
             if (values[x] == "^")
             {
                 double first = Convert.ToDouble(newValues[^1]);
-                double second = Convert.ToDouble(values[x + 1]);
+                var nextValue = x + 1;
+                double second = Convert.ToDouble(nextValue >= values.Count ? 0 : values[nextValue]);
                 double result = Math.Pow(first, second);
                 newValues.RemoveAt(newValues.Count - 1);
                 newValues.Add(result.ToString());
