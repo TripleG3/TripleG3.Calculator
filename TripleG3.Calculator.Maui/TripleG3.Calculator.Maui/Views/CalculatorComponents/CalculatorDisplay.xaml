@@ -13,7 +13,8 @@
                     <ViewCell>
                         <Label Text="{Binding}"
                                FontSize="12"
-                               TextColor="Gray" />
+                               TextColor="Gray"
+                               VerticalOptions="CenterAndExpand" />
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

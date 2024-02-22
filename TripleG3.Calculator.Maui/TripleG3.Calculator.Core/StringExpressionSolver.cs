@@ -9,6 +9,8 @@ public class StringExpressionSolver(IStringExpressionMutator stringExpressionTri
 
     public double Solve(string expression)
     {
+        if (string.IsNullOrWhiteSpace(expression)) return 0;
+
         expression = stringExpressionTrimmer.Mutate(expression);
 
         List<string> values = [];
@@ -209,7 +211,8 @@ public class StringExpressionSolver(IStringExpressionMutator stringExpressionTri
             if (values[x] == "+")
             {
                 double first = Convert.ToDouble(newValues[^1]);
-                double second = Convert.ToDouble(values[x + 1]);
+                var nextValue = x + 1;
+                double second = Convert.ToDouble(nextValue >= values.Count ? 0 : values[nextValue]);
                 double result = first + second;
                 newValues.RemoveAt(newValues.Count - 1);
                 newValues.Add(result.ToString());
@@ -220,7 +223,8 @@ public class StringExpressionSolver(IStringExpressionMutator stringExpressionTri
             if (values[x] == "-")
             {
                 double first = Convert.ToDouble(newValues[^1]);
-                double second = Convert.ToDouble(values[x + 1]);
+                var nextValue = x + 1;
+                double second = Convert.ToDouble(nextValue >= values.Count ? 0 : values[nextValue]);
                 double result = first - second;
                 newValues.RemoveAt(newValues.Count - 1);
                 newValues.Add(result.ToString());
@@ -246,7 +250,8 @@ public class StringExpressionSolver(IStringExpressionMutator stringExpressionTri
             if (values[x] == "*" || values[x] == "·")
             {
                 double first = Convert.ToDouble(newValues[^1]);
-                double second = Convert.ToDouble(values[x + 1]);
+                var nextValue = x + 1;
+                double second = Convert.ToDouble(nextValue >= values.Count ? 0 : values[nextValue]);
                 double result = first * second;
                 newValues.RemoveAt(newValues.Count - 1);
                 newValues.Add(result.ToString());
@@ -257,7 +262,8 @@ public class StringExpressionSolver(IStringExpressionMutator stringExpressionTri
             if (values[x] == "/" || values[x] == "÷")
             {
                 double first = Convert.ToDouble(newValues[^1]);
-                double second = Convert.ToDouble(values[x + 1]);
+                var nextValue = x + 1;
+                double second = Convert.ToDouble(nextValue >= values.Count ? 0 : values[nextValue]);
                 double result = first / second;
                 newValues.RemoveAt(newValues.Count - 1);
                 newValues.Add(result.ToString());
