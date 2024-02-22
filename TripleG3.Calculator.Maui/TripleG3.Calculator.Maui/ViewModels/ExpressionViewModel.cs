@@ -63,6 +63,7 @@ public sealed class ExpressionViewModel : ViewModelBase
     private void ClearExpression()
     {
         Expression = string.Empty;
+        Result = 0d;
     }
 
     private void SolveExpression(IStringExpressionSolver stringExpressionSolver)
