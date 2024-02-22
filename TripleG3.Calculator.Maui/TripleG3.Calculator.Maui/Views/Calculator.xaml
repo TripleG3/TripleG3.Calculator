@@ -7,7 +7,7 @@
              xmlns:ViewModels="clr-namespace:TripleG3.Calculator.Maui.ViewModels"
              Local:Specky.Inject="{x:Type ViewModels:ExpressionViewModel}">
 
-    <Grid RowDefinitions="1*, 4*">
+    <Grid RowDefinitions="1*, 2.5*">
         <CalculatorComponents:CalculatorDisplay />
         <CalculatorComponents:CalculatorButtons Grid.Row="1"/>
     </Grid>
