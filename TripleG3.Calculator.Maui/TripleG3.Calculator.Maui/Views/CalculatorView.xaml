@@ -7,16 +7,23 @@
              Local:Specky.Inject="{x:Type ViewModels:ExpressionViewModel}">
     <Grid RowDefinitions="*, *, *, *, *"
           ColumnDefinitions="*, *, *, *">
-        <Grid Grid.Row="0"
-              Grid.Column="0"
-              Grid.ColumnSpan="4"
-              BackgroundColor="LightGray">
-            <Label x:Name="ResultLabel"
-                   Text="{Binding Expression}"
-                   FontSize="Large"
-                   HorizontalOptions="End"
-                   VerticalOptions="Center" />
-        </Grid>
+        <!--Top row-->
+        <Button Text="C"
+                Command="{Binding DeleteFromEndOfExpressionCommand}" />
+        <Button Text="/"
+                Grid.Column="1"
+                Command="{Binding AddToExpressionCommand}"
+                CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
+        <Button Text="*"
+                Grid.Column="2"
+                Command="{Binding AddToExpressionCommand}"
+                CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
+        <Button Text="-"
+                Grid.Column="3"
+                Command="{Binding AddToExpressionCommand}"
+                CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
+
+        <!--7, 8, 9, + -->
         <Button Text="7"
                 Grid.Row="1"
                 Grid.Column="0"
@@ -32,6 +39,14 @@
                 Grid.Column="2"
                 Command="{Binding AddToExpressionCommand}"
                 CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
+        <Button Text="+"
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                Grid.Column="3"
+                Command="{Binding AddToExpressionCommand}"
+                CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
+
+        <!--4, 5, 6, + -->
         <Button Text="4"
                 Grid.Row="2"
                 Grid.Column="0"
@@ -47,6 +62,8 @@
                 Grid.Column="2"
                 Command="{Binding AddToExpressionCommand}"
                 CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
+
+        <!--1, 2, 3, = -->
         <Button Text="1"
                 Grid.Row="3"
                 Grid.Column="0"
@@ -62,6 +79,13 @@
                 Grid.Column="2"
                 Command="{Binding AddToExpressionCommand}"
                 CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
+        <Button Text="="
+                Grid.Row="3"
+                Grid.RowSpan="2"
+                Grid.Column="3"
+                Command="{Binding EvaluateExpressionCommand}" />
+
+        <!--0, ., = -->
         <Button Text="0"
                 Grid.Row="4"
                 Grid.Column="0"
@@ -73,24 +97,6 @@
                 Grid.Column="2"
                 Command="{Binding AddToExpressionCommand}"
                 CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
-        <Button Text="C"
-                Grid.Row="1"
-                Grid.Column="3"
-                Command="{Binding DeleteFromEndOfExpressionCommand}" />
-        <Button Text="*"
-                Grid.Row="2"
-                Grid.Column="3"
-                Command="{Binding AddToExpressionCommand}"
-                CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
-        <Button Text="+"
-                Grid.Row="3"
-                Grid.Column="3"
-                Command="{Binding AddToExpressionCommand}"
-                CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
-        <Button Text="-"
-                Grid.Row="4"
-                Grid.Column="3"
-                Command="{Binding AddToExpressionCommand}"
-                CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
+
     </Grid>
 </ContentView>
