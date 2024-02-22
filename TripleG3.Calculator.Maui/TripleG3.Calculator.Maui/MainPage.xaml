@@ -3,6 +3,5 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TripleG3.Calculator.Maui.MainPage"
              xmlns:Views="clr-namespace:TripleG3.Calculator.Maui.Views">
-
     <Views:CalculatorView />
 </ContentPage>
