@@ -2,96 +2,125 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
              x:Class="TripleG3.Calculator.Maui.Views.CalculatorComponents.CalculatorButtons">
-    <Grid RowDefinitions="*, *, *, *, *"
+    <Grid RowDefinitions="*, *, *, *, *, *"
           ColumnDefinitions="*, *, *, *"
           Margin="2">
-        <!--Top row-->
+        
+        <!-- (, ), ^, del -->
+        <Button Text="("
+                Grid.Row="0"
+                Grid.Column="0"
+                Command="{Binding AddToExpressionCommand}"
+                CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
+
+        <Button Text=")"
+                Grid.Row="0"
+                Grid.Column="1"
+                Command="{Binding AddToExpressionCommand}"
+                CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
+
+        <Button Text="^"
+                Grid.Row="0"
+                Grid.Column="2"
+                Command="{Binding AddToExpressionCommand}"
+                CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
+
+        <Button Text="DEL"
+                Grid.Row="0"
+                Grid.Column="3"
+                Command="{Binding DeleteFromEndOfExpressionCommand}" />
+
+        <!-- C, /, X, - -->
         <Button Text="C"
+                Grid.Row="1"
                 Command="{Binding ClearExpressionCommand}" />
         <Button Text="÷"
+                Grid.Row="1"
                 Grid.Column="1"
                 Command="{Binding AddToExpressionCommand}"
                 CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
         <Button Text="×"
+                Grid.Row="1"
                 Grid.Column="2"
                 Command="{Binding AddToExpressionCommand}"
                 CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
         <Button Text="-"
+                Grid.Row="1"
                 Grid.Column="3"
                 Command="{Binding AddToExpressionCommand}"
                 CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
 
-        <!--7, 8, 9, + -->
+        <!-- 7, 8, 9, + -->
         <Button Text="7"
-                Grid.Row="1"
+                Grid.Row="2"
                 Grid.Column="0"
                 Command="{Binding AddToExpressionCommand}"
                 CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
         <Button Text="8"
-                Grid.Row="1"
+                Grid.Row="2"
                 Grid.Column="1"
                 Command="{Binding AddToExpressionCommand}"
                 CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
         <Button Text="9"
-                Grid.Row="1"
+                Grid.Row="2"
                 Grid.Column="2"
                 Command="{Binding AddToExpressionCommand}"
                 CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
         <Button Text="+"
-                Grid.Row="1"
+                Grid.Row="2"
                 Grid.RowSpan="2"
                 Grid.Column="3"
                 Command="{Binding AddToExpressionCommand}"
                 CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
 
-        <!--4, 5, 6, + -->
+        <!-- 4, 5, 6, + -->
         <Button Text="4"
-                Grid.Row="2"
+                Grid.Row="3"
                 Grid.Column="0"
                 Command="{Binding AddToExpressionCommand}"
                 CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
         <Button Text="5"
-                Grid.Row="2"
+                Grid.Row="3"
                 Grid.Column="1"
                 Command="{Binding AddToExpressionCommand}"
                 CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
         <Button Text="6"
-                Grid.Row="2"
+                Grid.Row="3"
                 Grid.Column="2"
                 Command="{Binding AddToExpressionCommand}"
                 CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
 
-        <!--1, 2, 3, = -->
+        <!-- 1, 2, 3, = -->
         <Button Text="1"
-                Grid.Row="3"
+                Grid.Row="4"
                 Grid.Column="0"
                 Command="{Binding AddToExpressionCommand}"
                 CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
         <Button Text="2"
-                Grid.Row="3"
+                Grid.Row="4"
                 Grid.Column="1"
                 Command="{Binding AddToExpressionCommand}"
                 CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
         <Button Text="3"
-                Grid.Row="3"
+                Grid.Row="4"
                 Grid.Column="2"
                 Command="{Binding AddToExpressionCommand}"
                 CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
         <Button Text="="
-                Grid.Row="3"
+                Grid.Row="4"
                 Grid.RowSpan="2"
                 Grid.Column="3"
                 Command="{Binding SolveExpressionCommand}" />
 
-        <!--0, ., = -->
+        <!-- 0, ., = -->
         <Button Text="0"
-                Grid.Row="4"
+                Grid.Row="5"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Command="{Binding AddToExpressionCommand}"
                 CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
         <Button Text="."
-                Grid.Row="4"
+                Grid.Row="5"
                 Grid.Column="2"
                 Command="{Binding AddToExpressionCommand}"
                 CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
