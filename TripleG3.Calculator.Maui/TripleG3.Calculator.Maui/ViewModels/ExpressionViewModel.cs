@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using TripleG3.Calculator.Core;
+using TripleG3.Calculator.Core.Exceptions;
 using TripleG3.Calculator.Maui.ViewModels.Commands;
 
 namespace TripleG3.Calculator.Maui.ViewModels;
@@ -68,7 +69,15 @@ public sealed class ExpressionViewModel : ViewModelBase
 
     private void SolveExpression(IStringExpressionSolver stringExpressionSolver)
     {
-        Result = stringExpressionSolver.Solve(Expression);
+        try
+        {
+            Result = stringExpressionSolver.Solve(Expression);
+        }
+        catch (ExpressionFormatInvalidException ex)
+        {
+            Expression = ex.Message;
+            return;
+        }
         Expressions.Add(Expression);
         Expression = string.Empty;
     }
