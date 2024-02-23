@@ -7,7 +7,7 @@ public class StringExpressionSolverTests
     public void SolveTest()
     {
         //Arrange
-        var expected = -1.8681640625d;
+        const double expected = -1.8681640625d;
         var mockStringExpressionMutator = new MockStringExpressionMutator();
         var mockStringExpressionCleaner = new MockStringExpressionCleaner();
         var actor = new StringExpressionSolver(mockStringExpressionMutator, mockStringExpressionCleaner);
@@ -18,14 +18,38 @@ public class StringExpressionSolverTests
         //Assert
         Assert.AreEqual(expected, result);
     }
-}
 
-internal class MockStringExpressionCleaner : IStringExpressionCleaner
-{
-    public IReadOnlyCollection<string> CleanItems { get; } = [];
-
-    public string Clean(string expression)
+    [TestMethod()]
+    public void SolveNullTest()
     {
-        return expression;
+        //Arrange
+        const double expected = 0d;
+        const string? expression = null;
+        var mockStringExpressionMutator = new MockStringExpressionMutator();
+        var mockStringExpressionCleaner = new MockStringExpressionCleaner();
+        var actor = new StringExpressionSolver(mockStringExpressionMutator, mockStringExpressionCleaner);
+
+        //Act
+        var result = actor.Solve(expression);
+
+        //Assert
+        Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod()]
+    public void SolveEmptyTest()
+    {
+        //Arrange
+        const double expected = 0d;
+        const string? expression = "";
+        var mockStringExpressionMutator = new MockStringExpressionMutator();
+        var mockStringExpressionCleaner = new MockStringExpressionCleaner();
+        var actor = new StringExpressionSolver(mockStringExpressionMutator, mockStringExpressionCleaner);
+
+        //Act
+        var result = actor.Solve(expression);
+
+        //Assert
+        Assert.AreEqual(expected, result);
     }
 }

@@ -17,4 +17,20 @@ public class StringExpressionCleanerTests
         // Assert
         Assert.AreEqual(expected, actual);
     }
+
+    //Jibberish TEst
+    [TestMethod()]
+    public void CleanJibberishTest()
+    {
+        // Arrange
+        var expected = "";
+        var expression = "asdlkfjaslkfjasldfj";
+        var actor = new StringExpressionCleaner();
+
+        // Act
+        var actual = actor.Clean(expression);
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 }

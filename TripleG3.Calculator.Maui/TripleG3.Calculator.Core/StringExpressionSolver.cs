@@ -3,21 +3,24 @@
 namespace TripleG3.Calculator.Core;
 
 [Scoped<IStringExpressionSolver>]
-public class StringExpressionSolver(IStringExpressionMutator stringExpressionTrimmer, IStringExpressionCleaner stringExpressionCleaner) : IStringExpressionSolver
+public class StringExpressionSolver(IStringExpressionMutator stringExpressionTrimmer,
+                                    IStringExpressionCleaner stringExpressionCleaner,
+                                    IStringExpressionParenthesisCorrector stringExpressionParenthesisCorrector) : IStringExpressionSolver
 {
     private readonly IStringExpressionMutator stringExpressionTrimmer = stringExpressionTrimmer;
     private readonly IStringExpressionCleaner stringExpressionCleaner = stringExpressionCleaner;
+    private readonly IStringExpressionParenthesisCorrector stringExpressionParenthesisCorrector = stringExpressionParenthesisCorrector;
 
     public double Solve(string expression)
     {
-        if (string.IsNullOrWhiteSpace(expression)) return 0;
-
         expression = stringExpressionTrimmer.Mutate(expression);
         expression = stringExpressionCleaner.Clean(expression);
+        expression = stringExpressionParenthesisCorrector.Correct(expression);
+        if (string.IsNullOrWhiteSpace(expression)) return 0;
 
         List<string> values = [];
 
-        char[] chars = new char[] { '+', '-', '/', '÷', '*', '·', '^' };
+        char[] chars = ['+', '-', '/', '÷', '*', '·', '^'];
 
         string tempString = string.Empty;
 
