@@ -5,6 +5,7 @@ namespace TripleG3.Calculator.Core;
 [Scoped<IStringExpressionMutator>]
 public class StringExpressionMutator : IStringExpressionMutator
 {
+    //Order of these matter
     public IReadOnlyDictionary<string, string> StringToReplacements { get; } = new Dictionary<string, string>()
     {
         ["raised to the power of"] = "^",
@@ -21,6 +22,7 @@ public class StringExpressionMutator : IStringExpressionMutator
         ["multiply"] = "·",
         ["multiplied by"] = "·",
         ["times"] = "·",
+        ["six"] = "6",
         ["x"] = "·",
         ["×"] = "·",
         ["÷"] = "/",
@@ -37,7 +39,6 @@ public class StringExpressionMutator : IStringExpressionMutator
         ["three"] = "3",
         ["four"] = "4",
         ["five"] = "5",
-        ["six"] = "6",
         ["seven"] = "7",
         ["eight"] = "8",
         ["nine"] = "9",

@@ -9,7 +9,8 @@ public class StringExpressionSolverTests
         //Arrange
         var expected = -1.8681640625d;
         var mockStringExpressionMutator = new MockStringExpressionMutator();
-        var actor = new StringExpressionSolver(mockStringExpressionMutator);
+        var mockStringExpressionCleaner = new MockStringExpressionCleaner();
+        var actor = new StringExpressionSolver(mockStringExpressionMutator, mockStringExpressionCleaner);
 
         //Act
         var result = actor.Solve("((1+2·3)/4^5)+6-7/8·9+0");
@@ -19,8 +20,12 @@ public class StringExpressionSolverTests
     }
 }
 
-internal class MockStringExpressionMutator : IStringExpressionMutator
+internal class MockStringExpressionCleaner : IStringExpressionCleaner
 {
-    public IReadOnlyDictionary<string, string> StringToReplacements => throw new NotImplementedException();
-    public string Mutate(string expression) => expression;
+    public IReadOnlyCollection<string> CleanItems { get; } = [];
+
+    public string Clean(string expression)
+    {
+        return expression;
+    }
 }

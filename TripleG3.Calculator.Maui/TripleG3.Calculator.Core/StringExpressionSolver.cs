@@ -3,15 +3,17 @@
 namespace TripleG3.Calculator.Core;
 
 [Scoped<IStringExpressionSolver>]
-public class StringExpressionSolver(IStringExpressionMutator stringExpressionTrimmer) : IStringExpressionSolver
+public class StringExpressionSolver(IStringExpressionMutator stringExpressionTrimmer, IStringExpressionCleaner stringExpressionCleaner) : IStringExpressionSolver
 {
     private readonly IStringExpressionMutator stringExpressionTrimmer = stringExpressionTrimmer;
+    private readonly IStringExpressionCleaner stringExpressionCleaner = stringExpressionCleaner;
 
     public double Solve(string expression)
     {
         if (string.IsNullOrWhiteSpace(expression)) return 0;
 
         expression = stringExpressionTrimmer.Mutate(expression);
+        expression = stringExpressionCleaner.Clean(expression);
 
         List<string> values = [];
 
