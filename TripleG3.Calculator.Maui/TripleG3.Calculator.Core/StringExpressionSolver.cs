@@ -1,4 +1,5 @@
 ﻿using Specky7;
+using TripleG3.Calculator.Core.Exceptions;
 
 namespace TripleG3.Calculator.Core;
 
@@ -13,89 +14,96 @@ public class StringExpressionSolver(IStringExpressionMutator stringExpressionTri
 
     public double Solve(string expression)
     {
-        expression = stringExpressionTrimmer.Mutate(expression);
-        expression = stringExpressionCleaner.Clean(expression);
-        expression = stringExpressionParenthesisCorrector.Correct(expression);
-        if (string.IsNullOrWhiteSpace(expression)) return 0;
-
-        List<string> values = [];
-
-        char[] chars = ['+', '-', '/', '÷', '*', '·', '^'];
-
-        string tempString = string.Empty;
-
-        bool lastCharIsDigit = false;
-
-        int startLocation = 0;
-
-        if (expression[startLocation] == '-')
+        try
         {
-            tempString += "-";
-            startLocation += 1;
-        }
+            expression = stringExpressionTrimmer.Mutate(expression);
+            expression = stringExpressionCleaner.Clean(expression);
+            expression = stringExpressionParenthesisCorrector.Correct(expression);
+            if (string.IsNullOrWhiteSpace(expression)) return 0;
 
-        for (int location = startLocation; location < expression.Length; location++)
-        {
-            char c = expression[location];
+            List<string> values = [];
 
-            if (char.IsDigit(c) || c == '.')
+            char[] chars = ['+', '-', '/', '÷', '*', '·', '^'];
+
+            string tempString = string.Empty;
+
+            bool lastCharIsDigit = false;
+
+            int startLocation = 0;
+
+            if (expression[startLocation] == '-')
             {
-                lastCharIsDigit = true;
-
-                tempString += c;
-                continue;
+                tempString += "-";
+                startLocation += 1;
             }
 
-            if (lastCharIsDigit)
+            for (int location = startLocation; location < expression.Length; location++)
             {
-                values.Add(tempString);
-                tempString = string.Empty;
-                lastCharIsDigit = false;
+                char c = expression[location];
 
-                if (location < expression.Length - 1)
-                    if (expression[location] == '(')
-                        values.Add("·");
-            }
-
-            foreach (char opers in chars)
-            {
-                if (c == opers)
+                if (char.IsDigit(c) || c == '.')
                 {
-                    values.Add(c.ToString());
-                    break;
+                    lastCharIsDigit = true;
+
+                    tempString += c;
+                    continue;
+                }
+
+                if (lastCharIsDigit)
+                {
+                    values.Add(tempString);
+                    tempString = string.Empty;
+                    lastCharIsDigit = false;
+
+                    if (location < expression.Length - 1)
+                        if (expression[location] == '(')
+                            values.Add("·");
+                }
+
+                foreach (char opers in chars)
+                {
+                    if (c == opers)
+                    {
+                        values.Add(c.ToString());
+                        break;
+                    }
+                }
+
+                if (c == '(')
+                {
+                    location++;
+                    values.Add(SolveString(expression, ref location).ToString());
+                    continue;
+                }
+
+                if (c == ')')
+                {
+
+                    values = DoExponents(values);
+
+                    values = DoDivisionMultiply(values);
+
+                    values = DoAddSubtract(values);
+
+                    return Convert.ToDouble(values[0]);
                 }
             }
 
-            if (c == '(')
-            {
-                location++;
-                values.Add(SolveString(expression, ref location).ToString());
-                continue;
-            }
+            if (!string.IsNullOrEmpty(tempString))
+                values.Add(tempString);
 
-            if (c == ')')
-            {
+            values = DoExponents(values);
 
-                values = DoExponents(values);
+            values = DoDivisionMultiply(values);
 
-                values = DoDivisionMultiply(values);
+            values = DoAddSubtract(values);
 
-                values = DoAddSubtract(values);
-
-                return Convert.ToDouble(values[0]);
-            }
+            return Convert.ToDouble(values[0]);
         }
-
-        if (!string.IsNullOrEmpty(tempString))
-            values.Add(tempString);
-
-        values = DoExponents(values);
-
-        values = DoDivisionMultiply(values);
-
-        values = DoAddSubtract(values);
-
-        return Convert.ToDouble(values[0]);
+        catch
+        {
+            throw new ExpressionFormatInvalidException();
+        }
     }
 
     private static double SolveString(string equation, ref int location)
