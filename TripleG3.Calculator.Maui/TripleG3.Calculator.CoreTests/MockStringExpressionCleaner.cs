@@ -9,11 +9,3 @@ internal class MockStringExpressionCleaner : IStringExpressionCleaner
         return expression;
     }
 }
-
-internal class MockStringExpressionParenthesisCorrector : IStringExpressionParenthesisCorrector
-{
-    public string Correct(string expression)
-    {
-        return expression;
-    }
-}

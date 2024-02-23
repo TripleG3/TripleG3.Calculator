@@ -1,6 +1,8 @@
-﻿namespace TripleG3.Calculator.Core.Tests;
+﻿using TripleG3.Calculator.Core.Exceptions;
 
-[TestClass()]
+namespace TripleG3.Calculator.Core.Tests;
+
+[TestClass]
 public class StringExpressionSolverTests
 {
     private readonly IStringExpressionMutator mockStringExpressionMutator = new MockStringExpressionMutator();
@@ -14,7 +16,7 @@ public class StringExpressionSolverTests
         actor = new StringExpressionSolver(mockStringExpressionMutator, mockStringExpressionCleaner, mockStringExpressionParenthesisCorrector);
     }
 
-    [TestMethod()]
+    [TestMethod]
     public void SolveTest()
     {
         //Arrange
@@ -27,7 +29,7 @@ public class StringExpressionSolverTests
         Assert.AreEqual(expected, result);
     }
 
-    [TestMethod()]
+    [TestMethod]
     public void SolveNullTest()
     {
         //Arrange
@@ -41,7 +43,7 @@ public class StringExpressionSolverTests
         Assert.AreEqual(expected, result);
     }
 
-    [TestMethod()]
+    [TestMethod]
     public void SolveEmptyTest()
     {
         //Arrange
@@ -53,5 +55,18 @@ public class StringExpressionSolverTests
 
         //Assert
         Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void SolveExpressionFormatInvalidExceptionTest()
+    {
+        //Arrange
+        const string expression = "^^9";
+
+        //Act
+        void Act() => actor.Solve(expression);
+
+        //Assert
+        Assert.ThrowsException<ExpressionFormatInvalidException>(Act);
     }
 }
