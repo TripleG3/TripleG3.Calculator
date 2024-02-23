@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Converters="clr-namespace:TripleG3.Calculator.Maui.Views.Converters"
+             x:Class="TripleG3.Calculator.Maui.Resources.Converters.Converters">
+    <Converters:StringToBoolConverter x:Key="StringToBoolConverter" />
+</ResourceDictionary>

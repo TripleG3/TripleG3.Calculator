@@ -5,9 +5,9 @@
     <Grid RowDefinitions="1.5*, 4*, 2*">
 
         <Picker ItemsSource="{Binding Expressions}"
-                SelectedItem="{Binding Expression, Mode=OneWayToSource}" 
+                SelectedItem="{Binding Expression, Mode=OneWayToSource}"
                 Title="History"
-                TextColor="Gray"/>
+                TextColor="Gray" />
 
         <ScrollView HorizontalScrollBarVisibility="Default"
                     VerticalScrollBarVisibility="Never"
@@ -32,6 +32,16 @@
                    VerticalOptions="Center"
                    FontSize="40" />
         </ScrollView>
+
+        <Label Text="{Binding Information}"
+               IsVisible="{Binding Information, Converter={StaticResource StringToBoolConverter}}"
+               FontSize="40"
+               Grid.RowSpan="3"
+               BackgroundColor="#66B40000"
+               VerticalTextAlignment="Center"
+               HorizontalTextAlignment="Center"
+               VerticalOptions="Fill"
+               HorizontalOptions="Fill" />
 
     </Grid>
 </ContentView>

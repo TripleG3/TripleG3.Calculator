@@ -16,17 +16,22 @@ public sealed class ExpressionViewModel : ViewModelBase
         DeleteFromEndOfExpressionCommand = new RelayCommand(x => DeleteFromEndOfExpression());
         SolveExpressionCommand = new RelayCommand(x => SolveExpression(stringExpressionSolver));
         ClearExpressionCommand = new RelayCommand(x => ClearExpression());
+
+        expression = string.Empty;
+        information = string.Empty;
+        result = 0d;
     }
 
-    private string expression = string.Empty;
+    private string expression;
     private double result;
+    private string information;
 
     public ICommand SolveExpressionCommand { get; }
     public ICommand AddToExpressionCommand { get; }
     public ICommand DeleteFromEndOfExpressionCommand { get; }
     public ICommand ClearExpressionCommand { get; }
 
-    public ObservableCollection<string> Expressions { get; } = new();
+    public ObservableCollection<string> Expressions { get; } = [];
 
     public string Expression
     {
@@ -47,9 +52,23 @@ public sealed class ExpressionViewModel : ViewModelBase
             Notify();
         }
     }
+    public string Information
+    {
+        get => information;
+        set
+        {
+            information = value;
+            Notify();
+            if (!string.IsNullOrWhiteSpace(value))
+            {
+                Vibration.Default.TryVibrate(200);
+            }
+        }
+    }
 
     private void AddToExpression(object? x)
     {
+        Information = string.Empty;
         if (x is string str)
         {
             Expression += str;
@@ -58,11 +77,13 @@ public sealed class ExpressionViewModel : ViewModelBase
 
     private void DeleteFromEndOfExpression()
     {
+        Information = string.Empty;
         Expression = expression.Length > 0 ? expression[..^1] : string.Empty;
     }
 
     private void ClearExpression()
     {
+        Information = string.Empty;
         Expression = string.Empty;
         Result = 0d;
     }
@@ -75,7 +96,7 @@ public sealed class ExpressionViewModel : ViewModelBase
         }
         catch (ExpressionFormatInvalidException ex)
         {
-            Expression = ex.Message;
+            Information = ex.Message;
             return;
         }
         Expressions.Add(Expression);
