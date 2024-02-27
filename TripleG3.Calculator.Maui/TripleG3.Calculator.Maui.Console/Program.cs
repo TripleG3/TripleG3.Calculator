@@ -1,5 +1,4 @@
-﻿
-var expression = "(1+4) multiply by 8 divided by 2";
+﻿var expression = "(1+4) multiply by 8 divided by 2";
 
 var mutator = new TripleG3.Calculator.Core.StringExpressionMutator();
 var cleaner = new TripleG3.Calculator.Core.StringExpressionCleaner();
