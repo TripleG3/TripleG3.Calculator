@@ -4,11 +4,11 @@ using TripleG3.Calculator.Core.Exceptions;
 namespace TripleG3.Calculator.Core;
 
 [Scoped<IStringExpressionSolver>]
-public class StringExpressionSolver(IStringExpressionMutator stringExpressionTrimmer,
+public class StringExpressionSolver(IStringExpressionMutator stringExpressionMutator,
                                     IStringExpressionCleaner stringExpressionCleaner,
                                     IStringExpressionParenthesisCorrector stringExpressionParenthesisCorrector) : IStringExpressionSolver
 {
-    private readonly IStringExpressionMutator stringExpressionTrimmer = stringExpressionTrimmer;
+    private readonly IStringExpressionMutator stringExpressionMutator = stringExpressionMutator;
     private readonly IStringExpressionCleaner stringExpressionCleaner = stringExpressionCleaner;
     private readonly IStringExpressionParenthesisCorrector stringExpressionParenthesisCorrector = stringExpressionParenthesisCorrector;
 
@@ -16,7 +16,7 @@ public class StringExpressionSolver(IStringExpressionMutator stringExpressionTri
     {
         try
         {
-            expression = stringExpressionTrimmer.Mutate(expression);
+            expression = stringExpressionMutator.Mutate(expression);
             expression = stringExpressionCleaner.Clean(expression);
             expression = stringExpressionParenthesisCorrector.Correct(expression);
             if (string.IsNullOrWhiteSpace(expression)) return 0;

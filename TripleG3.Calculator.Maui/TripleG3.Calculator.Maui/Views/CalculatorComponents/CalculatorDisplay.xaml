@@ -2,6 +2,7 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TripleG3.Calculator.Maui.Views.CalculatorComponents.CalculatorDisplay">
+    
     <Grid RowDefinitions="1.5*, 4*, 2*">
 
         <Picker ItemsSource="{Binding Expressions}"

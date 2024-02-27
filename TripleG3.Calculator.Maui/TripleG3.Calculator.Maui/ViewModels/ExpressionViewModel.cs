@@ -52,6 +52,7 @@ public sealed class ExpressionViewModel : ViewModelBase
             Notify();
         }
     }
+    
     public string Information
     {
         get => information;
