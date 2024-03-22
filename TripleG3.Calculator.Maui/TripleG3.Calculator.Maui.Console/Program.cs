@@ -1,8 +1,12 @@
-﻿var expression = "(1+4) multiply by 8 divided by 2";
+﻿using TripleG3.Calculator.Core;
 
-var mutator = new TripleG3.Calculator.Core.StringExpressionMutator();
-var cleaner = new TripleG3.Calculator.Core.StringExpressionCleaner();
-var corrector = new TripleG3.Calculator.Core.StringExpressionParenthesisCorrector();
-var solver = new TripleG3.Calculator.Core.StringExpressionSolver(mutator, cleaner, corrector);
+var expression = "(1+4) multiply by 8 divided by 2";
 
-Console.WriteLine(solver.Solve(expression));
+var mutator = new StringExpressionMutator();
+var cleaner = new StringExpressionCleaner();
+var parenthesisCorrector = new StringExpressionParenthesisCorrector();
+var periodCorrect = new StringExpressionPeriodValidator();
+var solver = new StringExpressionSolver();
+var calculator = new Calculator(mutator, cleaner, parenthesisCorrector, periodCorrect, solver);
+
+Console.WriteLine(calculator.Calculate(expression));

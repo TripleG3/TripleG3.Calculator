@@ -7,8 +7,8 @@ public class StringExpressionCleanerTests
     public void CleanTest()
     {
         // Arrange
-        var expected = "((5+5)-6/12)·4+32";
-        var expression = "((5whatever+jibberish5)-and6/some12)then   ·4with+3and2";
+        var expected = "((5+5)-6/12)·4.5+32";
+        var expression = "((5whatever+jibberish5)-and6/some12)then   ·4.5with+3and2";
         var actor = new StringExpressionCleaner();
 
         // Act

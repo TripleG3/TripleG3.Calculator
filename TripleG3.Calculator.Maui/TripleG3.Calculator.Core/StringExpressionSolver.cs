@@ -4,21 +4,12 @@ using TripleG3.Calculator.Core.Exceptions;
 namespace TripleG3.Calculator.Core;
 
 [Scoped<IStringExpressionSolver>]
-public class StringExpressionSolver(IStringExpressionMutator stringExpressionMutator,
-                                    IStringExpressionCleaner stringExpressionCleaner,
-                                    IStringExpressionParenthesisCorrector stringExpressionParenthesisCorrector) : IStringExpressionSolver
+public class StringExpressionSolver : IStringExpressionSolver
 {
-    private readonly IStringExpressionMutator stringExpressionMutator = stringExpressionMutator;
-    private readonly IStringExpressionCleaner stringExpressionCleaner = stringExpressionCleaner;
-    private readonly IStringExpressionParenthesisCorrector stringExpressionParenthesisCorrector = stringExpressionParenthesisCorrector;
-
     public double Solve(string expression)
     {
         try
         {
-            expression = stringExpressionMutator.Mutate(expression);
-            expression = stringExpressionCleaner.Clean(expression);
-            expression = stringExpressionParenthesisCorrector.Correct(expression);
             if (string.IsNullOrWhiteSpace(expression)) return 0;
 
             List<string> values = [];

@@ -10,11 +10,11 @@ namespace TripleG3.Calculator.Maui.ViewModels;
 [Scoped]
 public sealed class ExpressionViewModel : ViewModelBase
 {
-    public ExpressionViewModel(IStringExpressionSolver stringExpressionSolver)
+    public ExpressionViewModel(ICalculator calculator)
     {
         AddToExpressionCommand = new RelayCommand(AddToExpression);
         DeleteFromEndOfExpressionCommand = new RelayCommand(x => DeleteFromEndOfExpression());
-        SolveExpressionCommand = new RelayCommand(x => SolveExpression(stringExpressionSolver));
+        SolveExpressionCommand = new RelayCommand(x => SolveExpression(calculator));
         ClearExpressionCommand = new RelayCommand(x => ClearExpression());
 
         expression = string.Empty;
@@ -89,11 +89,11 @@ public sealed class ExpressionViewModel : ViewModelBase
         Result = 0d;
     }
 
-    private void SolveExpression(IStringExpressionSolver stringExpressionSolver)
+    private void SolveExpression(ICalculator calculator)
     {
         try
         {
-            Result = stringExpressionSolver.Solve(Expression);
+            Result = calculator.Calculate(Expression);
         }
         catch (ExpressionFormatInvalidException ex)
         {

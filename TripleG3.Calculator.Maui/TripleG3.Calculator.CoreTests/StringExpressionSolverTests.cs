@@ -5,15 +5,12 @@ namespace TripleG3.Calculator.Core.Tests;
 [TestClass]
 public class StringExpressionSolverTests
 {
-    private readonly IStringExpressionMutator mockStringExpressionMutator = new MockStringExpressionMutator();
-    private readonly IStringExpressionCleaner mockStringExpressionCleaner = new MockStringExpressionCleaner();
-    private readonly IStringExpressionParenthesisCorrector mockStringExpressionParenthesisCorrector = new MockStringExpressionParenthesisCorrector();
-    private StringExpressionSolver actor;
+   private StringExpressionSolver actor;
 
     [TestInitialize]
     public void TestInitialize()
     {
-        actor = new StringExpressionSolver(mockStringExpressionMutator, mockStringExpressionCleaner, mockStringExpressionParenthesisCorrector);
+        actor = new StringExpressionSolver();
     }
 
     [TestMethod]
@@ -37,10 +34,10 @@ public class StringExpressionSolverTests
         const string? expression = null;
 
         //Act
-        var result = actor.Solve(expression!);
+        var actual = actor.Solve(expression!);
 
         //Assert
-        Assert.AreEqual(expected, result);
+        Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
@@ -51,10 +48,10 @@ public class StringExpressionSolverTests
         const string expression = "";
 
         //Act
-        var result = actor.Solve(expression);
+        var actual = actor.Solve(expression);
 
         //Assert
-        Assert.AreEqual(expected, result);
+        Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
